@@ -12,13 +12,12 @@
 	<!-- 导入资源文件 -->
 	<context:property-placeholder location="classpath:db.properties"/>
 
-	<!-- 配置 C3P0 数据源 -->
+	<!-- 配置 C3P0 dataSource 数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="user" value="${jdbc.user}"></property>
 		<property name="password" value="${jdbc.password}"></property>
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
-		
 		<property name="initialPoolSize" value="${jdbc.initPoolSize}"></property>
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
 	</bean>
@@ -27,7 +26,7 @@
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
-		<property name="mappingLocations" value="classpath:com/atguigu/ssh/entities/*.hbm.xml"></property>
+		<property name="mappingLocations" value="classpath:com/lcc/entity/*.hbm.xml"></property>
 	</bean>
 	
 	<!-- 配置 Spring 的声明式事务 -->
@@ -47,7 +46,7 @@
 	
 	<!-- 3. 配置事务切入点, 再把事务属性和事务切入点关联起来 -->
 	<aop:config>
-		<aop:pointcut expression="execution(* com.atguigu.ssh.service.*.*(..))" id="txPointcut"/>
+		<aop:pointcut expression="execution(* com.lcc.service.*.*(..))" id="txPointcut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
 	</aop:config>
 
